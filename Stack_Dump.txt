@@ -1,0 +1,23 @@
+Stack_Dump:		ok
+
+	Stack [0x7fffffffde60]
+	{
+		errcode_ = 0 (No errors)
+		canary_1_ = 0x437D6849248F8D62
+		cap_ = 4
+		size_ = 2
+		size_buf_ = 32
+		buffer_ = [0x555555769ed0]
+			canary_buf_1 = 0xCD04196515DECF96
+		data_ = [0x555555769ed8]
+		{
+			*[0] = 20
+			*[1] = 30
+			 [2] = -666	(Poison???)
+			 [3] = -666	(Poison???)
+		}
+		canary_buf_2 = 0x5D713252E19323F
+		Hash_ = 3316648612
+		Numb_of_hash_func = 0
+		canary_2_ = 0xBA0B77C5B3FBC750
+	}

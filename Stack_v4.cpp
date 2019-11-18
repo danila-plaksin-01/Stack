@@ -20,7 +20,7 @@ int Stack<SizeT, ElemT>::OK(unsigned int from)
 
     if (size_ < 0)
         return ERR_LITTLE_COUNT;
-    
+
     if ((from == POP_FIRST) && (size_ <= 0))
         return ERR_LITTLE_COUNT;
 
@@ -46,10 +46,10 @@ int Stack<SizeT, ElemT>::OK(unsigned int from)
 
     if (Pseudo_Copy_->canary_2_ != canary_2_)
         return ERR_CANARY_2;
-    
+
     if ((from != NEW) && (Pseudo_Copy_->buffer_ != buffer_))
         return ERR_BUF;
-    
+
     if ((from != NEW) && (Pseudo_Copy_->data_ != data_))
         return ERR_DATA;
 
@@ -78,7 +78,7 @@ CanaryT Stack<SizeT, ElemT>::Canary_Init_()
         first = false;
         srand(time(0));
     }
-    
+
     unsigned int Up = sizeof(CanaryT) * 2;
     CanaryT canary = 0;
     for (int i = 0; i < Up; ++i)
@@ -136,22 +136,22 @@ char* Stack<SizeT, ElemT>::Error_Processing_()
     {
     case 0:
         return (char*) "(No errors)";
-    CASE(ERR_NULLPTR)     
+    CASE(ERR_NULLPTR)
     CASE(ERR_BIG_COUNT)
     CASE(ERR_LITTLE_COUNT)
-    CASE(ERR_REALLOC)  
-    CASE(ERR_BAD_POINTER) 
-    CASE(ERR_CANARY_1)    
-    CASE(ERR_CANARY_2)   
+    CASE(ERR_REALLOC)
+    CASE(ERR_BAD_POINTER)
+    CASE(ERR_CANARY_1)
+    CASE(ERR_CANARY_2)
     CASE(ERR_CANARY_BUF_1)
     CASE(ERR_CANARY_BUF_2)
-    CASE(ERR_BUF)         
-    CASE(ERR_DATA)        
-    CASE(ERR_PSEUDO_COPY)   
+    CASE(ERR_BUF)
+    CASE(ERR_DATA)
+    CASE(ERR_PSEUDO_COPY)
     CASE(ERR_NUMB_FUNC)
-    CASE(ERR_HASH)     
+    CASE(ERR_HASH)
     default:
-        return (char*)"(Unknown error)";  
+        return (char*)"(Unknown error)";
     }
 }
 
@@ -179,7 +179,7 @@ int Stack<SizeT, ElemT>::Construct()
     *(CanaryT*)((char*)buffer_ + cap_ * sizeof(data_[0]) + sizeof(CanaryT)) = canary_buf_2;
 
     Hash_ = Hash_Func[Numb_of_hash_func_]((const char*)buffer_, size_buf_);
-    
+
     /*Создаем и инициализируем копии*/
     Pseudo_Copy_ = (Stack_Copy<SizeT, ElemT>*)calloc(1, sizeof(Pseudo_Copy_[0]));
     Pseudo_Copy_->Numb_of_hash_func_ = Numb_of_hash_func_;
@@ -239,6 +239,12 @@ int Stack<SizeT, ElemT>::Destruct()
     ASSERT_OK(DESTRUCT)
     cap_ = 0;
     size_ = 0;
+    size_buf_ = 0;
+    canary_1_ = 0;
+    canary_2_ = 0;
+    errcode_ = 0;
+    Hash_ = 0;
+    Numb_of_hash_func_ = 0;
     free(buffer_);
     free(Pseudo_Copy_);
     return 0;

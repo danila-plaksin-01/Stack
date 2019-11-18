@@ -22,7 +22,7 @@
 #define ERR_PSEUDO_COPY     4906  // не совпадает указатель на копию
 #define ERR_NUMB_FUNC       7477 // не совпадает номер хэш-функции
 #define ERR_HASH            6126 // не совпадает хэш
-#define NEW                 732               
+#define NEW                 732
 #define CONSTRUCT           4972
 #define PUSH_FIRST          7261
 #define PUSH_SECOND         7262
@@ -58,7 +58,7 @@ private:
     void* buffer_;
     void New();
     int errcode_;
-    char* Error_Processing_();
+    char* Error_Processing_();/* Функция обработки ошибок*/
     Stack_Copy<SizeT, ElemT>* Pseudo_Copy_;/* Указатель на структуру,
     хранящуюю предыдущие значения переменных*/
     unsigned int Hash_;
